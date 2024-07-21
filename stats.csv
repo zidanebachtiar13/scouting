@@ -1,0 +1,26 @@
+Name,Age,Height,Market Value,img_url,Position,Team
+Alex,31,"1,87 m","Rp4,35B",https://lapangbola-rails-files.s3.ap-southeast-1.amazonaws.com/documents/players/alex_original_59112.png?1690778035,CF,Dewa United FC
+Majed Osman,30,"1,83 m","Rp6,52B",https://lapangbola-rails-files.s3.ap-southeast-1.amazonaws.com/documents/players/foto-majed-osman-sobhi-230630-1688075664_original_40839.jpg?1698309326,LW,Dewa United FC
+Septian Bagaskara,26,"1,83 m","Rp2,61B",https://lapangbola-rails-files.s3.ap-southeast-1.amazonaws.com/documents/players/foto-septian-satria-bagaskara-230626-1687737067_original_23614.jpg?1698309642,CF,Dewa United FC
+Rangga Muslim Perkasa,30,"1,66 m","Rp2,17B",https://lapangbola-rails-files.s3.ap-southeast-1.amazonaws.com/documents/players/foto-rangga-muslim-perkasa-230616-1686905324_original_23585.jpg?1698309578,AMF,Dewa United FC
+Egy Maulana Vikri,24,"1,70 m","Rp4,35B",https://lapangbola-rails-files.s3.ap-southeast-1.amazonaws.com/documents/players/foto-egy-maulana-vikri-230621-1687319089_original_28500.jpg?1698309206,RW,Dewa United FC
+Ricky Kambuaya,28,"1,77 m","Rp4,78B",https://lapangbola-rails-files.s3.ap-southeast-1.amazonaws.com/documents/players/foto-ricki-kambuaya-230706-1688653247_original_23550.jpg?1698309604,AMF,Dewa United FC
+Dimitrios Kolovos,31,"1,84 m","Rp6,52B",https://cms.disway.id/uploads/7dcd4e5698a36d5a9fa9abd4df74404e.jpg,AMF,Dewa United FC
+Robi Darwis,20,"1,70 m","Rp1,74B",https://img.a.transfermarkt.technology/portrait/big/989215-1699722912.png?lm=1,DMF,Dewa United FC
+OJ Porteria,30,"1,70 m","Rp1,30B",https://img.a.transfermarkt.technology/portrait/big/241744-1645383270.jpg?lm=1,LW,Dewa United FC
+Ahmad Nufiandani,29,"1,78 m","Rp2,17B",https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsmEO63bTkDCWmLUne2lr_T2OPqi2EinmbHA&s,RW,Dewa United FC
+Feby Eka Putra,25,"1,83 m","Rp1,74B",https://lapangbola-rails-files.s3.ap-southeast-1.amazonaws.com/documents/players/foto-feby-eka-putra-230616-1686905426_original_23456.jpg?1698309222,LW,Dewa United FC
+Asep Berlian,34,"1,78 m","Rp869,08M",https://lapangbola-rails-files.s3.ap-southeast-1.amazonaws.com/documents/players/foto-asep-berlian-230622-1687381137_original_22359.jpg?1698309103,DMF,Dewa United FC
+Theo Numberi,22,"1,64 m","Rp1,74B",https://lapangbola-rails-files.s3.ap-southeast-1.amazonaws.com/documents/players/foto-theo-fillo-bd-numberi-230626-1687737742_original_24666.jpg?1698309673,DMF,Dewa United FC
+Nasir,28,"1,70 m","Rp1,30B",https://lapangbola-rails-files.s3.ap-southeast-1.amazonaws.com/documents/players/foto-nasir-230616-1686905069_original_22974.jpg?1698309408,LB,Dewa United FC
+Dennish Himawan,23,"1,74 m","Rp434,54M",https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV04lc046teOGHlkGGzUaS6H2pLq1tl7gZdw&s,RW,Dewa United FC
+Risto Mitrevski,32,"1,87 m","Rp3,48B",https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSb6z57XZgvnNs3Q2YG6PhIDRCXkifPMSsvg&s,CB,Dewa United FC
+Altariq Ballah,23,"1,75 m","Rp3,48B",https://img.a.transfermarkt.technology/portrait/big/875237-1617807024.jpg?lm=1,LB,Dewa United FC
+Ady Setiawan,29,"1,67 m","Rp3,04B",https://lapangbola-rails-files.s3.ap-southeast-1.amazonaws.com/documents/players/PE7687_original_23503.png?1691045533,RB,Dewa United FC
+Ahmad Rusadi,21,"1,80 m","Rp1,30B",https://lapangbola-rails-files.s3.ap-southeast-1.amazonaws.com/documents/players/foto-ahmad-rusadi-230622-1687380457_original_35913.jpg?1698309049,CB,Dewa United FC
+Agung Mannan,25,"1,75 m","Rp2,17B",https://lapangbola-rails-files.s3.ap-southeast-1.amazonaws.com/documents/players/PE171595398_original_32244.png?1691045951,CB,Dewa United FC
+Brian Fatari,24,"1,86 m","Rp434,54M",https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnqNFfW_pM7wte8wagqDDp9T_4X7Pqpm_5YA&s,CB,Dewa United FC
+Iqbal Al Ghuzat,25,"1,66 m","Rp1,30B",https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQew0RiLjStUbbub3qGQROGzdhiOT_q2hGf0A&s,LB,Dewa United FC
+Mochammad Zaenuri,29,"1,82 m","Rp2,61B",https://lapangbola-rails-files.s3.ap-southeast-1.amazonaws.com/documents/players/foto-moch-zaenuri-230616-1686880810_original_23627.jpg?1698309355,CB,Dewa United FC
+Sonny Stevens,32,"1,94 m","Rp6,95B",https://img.a.transfermarkt.technology/portrait/big/160361-1418857040.jpg?lm=1,GK,Dewa United FC
+Muhammad Natshir Fadhil Mahbuby,31,"1,82 m","Rp2,17B",https://lapangbola-rails-files.s3.ap-southeast-1.amazonaws.com/documents/players/foto-m-natshir-fadhil-mahbuby-230622-1687379691_original_17843.jpg?1698309429,GK,Dewa United FC
