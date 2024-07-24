@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from sqlalchemy import String, Integer
 import pandas as pd
@@ -7,6 +8,12 @@ class Base(DeclarativeBase):
     pass
 
 db = SQLAlchemy(model_class=Base)
+
+class User(UserMixin, db.Model):
+    __tablename__ = 'users'
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    username: Mapped[str] = mapped_column(String(20), unique=True)
+    password: Mapped[str] = mapped_column(String(100))
 
 class Team(db.Model):
     __tablename__ = 'teams'
@@ -26,6 +33,12 @@ class Player(db.Model):
     position: Mapped[str] = mapped_column(String(5), nullable=False)
     team_alias: Mapped[str] = mapped_column(String(20), db.ForeignKey('teams.alias'))
     team = relationship('Team', back_populates='players')
+
+account = open('account.txt', 'r')
+users = []
+for acc in account:
+    acc = acc.split(',')
+    users.append({'username': acc[0], 'password': acc[1][:-1]})
 
 teams = [{'alias': 'arema', 'name': 'Arema FC', 'img_url': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLYLBf0LmY32zajndwW0OxlgcrntemSniQAQ&s'},
          {'alias': 'bali', 'name': 'Bali United', 'img_url': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYxJ2JNKB7W_8ChneVsAERXExVTACSnkqngg&s'},

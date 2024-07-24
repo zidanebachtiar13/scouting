@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Search{% endblock %}
+{% block content %}
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-md-6 text-center mb-5">
+		</div>
+	</div>
+	<div class="row justify-content-center">
+		<div class="col-sm-12 mb-4">
+			<form action="{{ url_for('search') }}" method="POST">
+				<div class="form">
+					<i class="fa fa-search"></i>
+					<input type="text" name="search" class="form-control form-input" placeholder="Search player or position...">
+				</div>
+			</form>
+		</div>
+		{% for player in players %}
+			<div class="col-sm-12 col-md-6 col-lg-3 mb-4">
+				<a href="#">
+					<div class="card2">
+						<div class="front" style="background-image: url('{{ player['img_url'] }}')"></div>
+						<div class="back">
+							<div>
+								<div class="name">{{ player['name'] }}</div>
+								<p class="position">{{ player['position'] }}</p>
+								<p class="market">Market Value:<br><b style="color:#157811">{{ player['market_value'] }}</b></br></p>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}

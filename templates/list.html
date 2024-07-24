@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}List {{ route.capitalize() }}{% endblock %}
+{% block content %}
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-sm-12 mb-4">
+		</div>
+	</div>
+	<div class="row justify-content-center">
+		{% if route == 'teams' %}
+			<div class="col-sm-12 col-md-6 col-lg-7 mb-4">
+		{% elif route == 'players' %}
+			<div class="col-sm-12 col-md-8 col-lg-9 mb-4">
+		{% elif route == 'users' %}
+			<div class="col-sm-12 col-md-8 col-lg-4 mb-4">
+		{% endif %}
+		<table id="myTable" class="table table-dark table-striped table-hover">
+			<thead>
+				<tr>
+					{% if route == 'teams' %}
+						<th>Logo</th>
+						<th>Team</th>
+						<th>Alias</th>
+						<th>Action</th>
+					{% elif route == 'players' %}
+						<th>Photo</th>
+						<th>Name</th>
+						<th>Position</th>
+						<th>Age</th>
+						<th>Height</th>
+						<th>Market Value</th>
+						<th>Action</th>
+					{% elif route == 'users' %}
+						<th>Username</th>
+						<th>Action</th>
+					{% endif %}
+				</tr>
+			</thead>
+			<tbody>
+				{% for list in lists %}
+					<tr>
+						{% if route == 'teams' %}
+							<td><img src="{{ list['img_url'] }}" width="16px"></td>
+							<td>{{ list['name'] }}</td>
+							<td>{{ list['alias'] }}</td>
+							<td><a href="#"><i class="fa fa-edit"></i></a><a href="#"><i class="fa fa-trash"></i></a></td>
+						{% elif route == 'players' %}
+							<td><img src="{{ list['img_url'] }}" width="16px"></td>
+							<td>{{ list['name'] }}</td>
+							<td>{{ list['position'] }}</td>
+							<td>{{ list['age'] }}</td>
+							<td>{{ list['height'] }}</td>
+							<td>{{ list['market_value'] }}</td>
+							<td><a href="#"><i class="fa fa-edit"></i></a><a href="#"><i class="fa fa-trash"></i></a></td>
+						{% elif route == 'users' %}
+							<td>{{ list['username'] }}</td>
+							{% if list['id'] == 1 %}
+								<td></td>
+							{% else %}
+								<td><a href="#"><i class="fa fa-edit"></i></a><a href="#"><i class="fa fa-trash"></i></a></td>
+							{% endif %}
+						{% endif %}
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<div>
+			<a href="#"><button type="button" class="btn btn-light"><i class="fa fa-plus"></i></button></a>
+		</div>
+	</div>
+</div>
+<script>
+	let table = new DataTable('#myTable', {
+		ordering: false,
+		paging: false,
+		info: false,
+		scrollCollapse: true,
+		scrollY: '60vh'
+	});
+</script>
+{% endblock %}

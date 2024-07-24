@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}
+	{% if players %}
+		Select Player
+	{% else %}
+		Select Team
+	{% endif %}
+{% endblock %}
+{% block content %}
+<div class="jumbotron text-center">
+	<div class="container">
+		<h1 class="display-6 space-above">
+			{% if players %}
+				Select Player
+			{% else %}
+				Select Team
+			{% endif %}
+		</h1>
+		<hr class="my-4">
+		<div class="row">
+			{% for player in players %}
+				<div class="col-sm-12 col-md-6 col-lg-3 mb-4">
+					<a href="{{ url_for('player_details', id=player['id']) }}">
+						<div class="card2">
+							<div class="front" style="background-image: url({{ player['img_url'] }})"></div>
+							<div class="back">
+								<div>
+									<div class="name">{{ player['name'] }}</div>
+									<p class="position">{{ player['position'] }}</p>
+									<p class="market">Market Value:<br><b style="color:#157811">{{ player['market_value'] }}</b></br></p>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			{% endfor %}
+			{% for club in clubs %}
+				<div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+					<a href={{ url_for('select_player', alias=club['alias']) }}>
+						<div class="card text-dark card-has-bg click-col">
+							<div class="card-img-overlay d-flex flex-column">
+								<div class="card-body">
+									<img src={{ club['img_url'] }}>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+{% endblock %}
