@@ -2,9 +2,11 @@
 {% block title %}Search{% endblock %}
 {% block content %}
 <div class="container">
-	<div class="row justify-content-center">
-		<div class="col-md-6 text-center mb-5">
-		</div>
+	<div class="row justify-content-center mb-3">
+	</div>
+	<div class="d-flex justify-content-end mb-5">
+		<a href="{{ url_for('main') }}"><button type="button" class="btn btn-light btn-space"><i class="fa fa-home"></i></button></a>
+		<a href="{{ url_for('logout') }}"><button type="button" class="btn btn-light"><i class="fa fa-sign-out"></i></button></a>
 	</div>
 	<div class="row justify-content-center">
 		<div class="col-sm-12 mb-4">
@@ -17,7 +19,7 @@
 		</div>
 		{% for player in players %}
 			<div class="col-sm-12 col-md-6 col-lg-3 mb-4">
-				<a href="#">
+				<a href="{{ url_for('player_details', id=player['id']) }}">
 					<div class="card2">
 						<div class="front" style="background-image: url('{{ player['img_url'] }}')"></div>
 						<div class="back">

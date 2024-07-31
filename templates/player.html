@@ -1,36 +1,316 @@
 {% extends 'base.html' %}
-{% block title %}Search{% endblock %}
+{% block title %}{{ player['name'] }} Stats{% endblock %}
 {% block content %}
-<div class="container">
-	<div class="row justify-content-center">
-		<div class="col-md-6 text-center mb-5">
+<div class="jumbotron text-center">
+	<div class="container">
+		<div class="row justify-content-center mb-3">
 		</div>
-	</div>
-	<div class="row justify-content-center">
-		<div class="col-sm-12 mb-4">
-			<form action="{{ url_for('search') }}" method="POST">
-				<div class="form">
-					<i class="fa fa-search"></i>
-					<input type="text" name="search" class="form-control form-input" placeholder="Search player or position...">
-				</div>
-			</form>
+		<div class="d-flex justify-content-end mb-4">
+			<a href="{{ url_for('main') }}"><button type="button" class="btn btn-light btn-space"><i class="fa fa-home"></i></button></a>
+			<a href="{{ url_for('logout') }}"><button type="button" class="btn btn-light"><i class="fa fa-sign-out"></i></button></a>
 		</div>
-		{% for player in players %}
+		<div class="row">
 			<div class="col-sm-12 col-md-6 col-lg-3 mb-4">
-				<a href="#">
-					<div class="card2">
-						<div class="front" style="background-image: url('{{ player['img_url'] }}')"></div>
-						<div class="back">
-							<div>
-								<div class="name">{{ player['name'] }}</div>
-								<p class="position">{{ player['position'] }}</p>
-								<p class="market">Market Value:<br><b style="color:#157811">{{ player['market_value'] }}</b></br></p>
+				<div class="card2">
+					<div class="front2" style="background-image: url({{ player['img_url'] }})"></div>
+				</div>
+			</div>
+			<div class="col-sm-12 col-md-6 col-lg-9">
+				<div class="col-sm-12">
+					<h1 class="display-6">{{ player['name'] }}</h1>
+					<hr class="my-4">
+				</div>
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="card4 text-white bg-card mb-3">
+							<div class="card-header">Position</div>
+							<div class="card-body">
+								<p class="card-text">{{ player['position'] }}</p>
 							</div>
 						</div>
 					</div>
-				</a>
+					<div class="col-lg-4">
+						<div class="card4 text-white bg-card mb-3">
+							<div class="card-header">Age</div>
+							<div class="card-body">
+								<p class="card-text">{{ player['age'] }}</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="card4 text-white bg-card mb-3">
+							<div class="card-header">Height</div>
+							<div class="card-body">
+								<p class="card-text">{{ player['height'] }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="card4 text-white bg-card mb-3">
+							<div class="card-header">Market Value</div>
+							<div class="card-body">
+								<p class="card-text">{{ player['market_value'] }}</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="card4 text-white bg-card mb-3">
+							<div class="card-header">Team</div>
+							<div class="card-body">
+								<p class="card-text">{{ player['team']['name'] }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-		{% endfor %}
+			<div class="row justify-content-center">
+				<div class="col-lg-3">
+					<table class="table table-borderless table-transparent">
+						<thead>
+							<tr>
+								<td>Total Played</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>{{ stats[0]['total_played'] }}</th>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-lg-3">
+					<table class="table table-borderless table-transparent">
+						<thead>
+							<tr>
+								<td>Started</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>{{ stats[0]['started'] }}</th>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-lg-3">
+					<table class="table table-borderless table-transparent">
+						<thead>
+							<tr>
+								<td>Minutes per game</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>{{ stats[0]['minutes_per_game'] }}</th>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="col-sm-12 col-md-6 col-lg-3 mb-4">
+				{% if player['position'] == 'GK' %}
+					<h1 style="font-size:35px" class="display-6">Goalkeeping</h1>
+					<hr class="my-4">
+					<table class="table table-borderless table-transparent">
+						<tbody>
+							<tr>
+								<td>Goals conceded per game</td>
+								<th>{{ stats[0]['goals_conceded_per_game'] }}</th>
+							</tr>
+							<tr>
+								<td>Saves per game</td>
+								<th>{{ stats[0]['saves_per_game'] }}</th>
+							</tr>
+							<tr>
+								<td>Clean sheets</td>
+								<th>{{ stats[0]['clean_sheets'] }}</th>
+							</tr>
+							<tr>
+								<td>Goal kicks per game</td>
+								<th>{{ stats[0]['goal_kicks_per_game'] }}</th>
+							</tr>
+						</tbody>
+					</table>
+				{% else %}
+					<h1 style="font-size:35px" class="display-6">Attacking</h1>
+					<hr class="my-4">
+					<table class="table table-borderless table-transparent">
+						<tbody>
+							<tr>
+								<td>Goals</td>
+								<th>{{ stats[0]['goals'] }}</th>
+							</tr>
+							<tr>
+								<td>Scoring frequency</td>
+								<th>{{ stats[0]['scoring_frequency'] }}</th>
+							</tr>
+							<tr>
+								<td>Goals per game</td>
+								<th>{{ stats[0]['goals_per_game'] }}</th>
+							</tr>
+							<tr>
+								<td>Shots per game</td>
+								<th>{{ stats[0]['shots_per_game'] }}</th>
+							</tr>
+							<tr>
+								<td>Shots on target per game</td>
+								<th>{{ stats[0]['shots_on_target_per_game'] }}</th>
+							</tr>
+							<tr>
+								<td>Succ. dribbles</td>
+								<th>{{ stats[0]['succ_dribbles'] }}</th>
+							</tr>
+						</tbody>
+					</table>
+				{% endif %}
+			</div>
+			<div class="col-sm-12 col-md-6 col-lg-3 mb-4">
+				<h1 style="font-size:35px" class="display-6">Passing</h1>
+				<hr class="my-4">
+				<table class="table table-borderless table-transparent">
+					<tbody>
+						<tr>
+							<td>Assists</td>
+							<th>{{ stats[0]['assists'] }}</th>
+						</tr>
+						<tr>
+							<td>Key passes per game</td>
+							<th>{{ stats[0]['key_passes_per_game'] }}</th>
+						</tr>
+						<tr>
+							<td>Accurate per game</td>
+							<th>{{ stats[0]['accurate_per_game'] }}</th>
+						</tr>
+						<tr>
+							<td>Acc. long balls</td>
+							<th>{{ stats[0]['acc_long_balls'] }}</th>
+						</tr>
+						<tr>
+							<td>Acc. crosses</td>
+							<th>{{ stats[0]['acc_crosses'] }}</th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-sm-12 col-md-6 col-lg-3 mb-4">
+				<h1 style="font-size:35px" class="display-6">Defending</h1>
+				<hr class="my-4">
+				<table class="table table-borderless table-transparent">
+					<tbody>
+						<tr>
+							<td>Interceptions per game</td>
+							<th>{{ stats[0]['interceptions_per_game'] }}</th>
+						</tr>
+						<tr>
+							<td>Balls recovered per game</td>
+							<th>{{ stats[0]['balls_recovered_per_game'] }}</th>
+						</tr>
+						<tr>
+							<td>Dribbled past per game</td>
+							<th>{{ stats[0]['dribbled_past_per_game'] }}</th>
+						</tr>
+						<tr>
+							<td>Clearances per game</td>
+							<th>{{ stats[0]['clearances_per_game'] }}</th>
+						</tr>
+						<tr>
+							<td>Total duels won</td>
+							<th>{{ stats[0]['total_duels_won'] }}</th>
+						</tr>
+						<tr>
+							<td>Aerial duels won</td>
+							<th>{{ stats[0]['aerial_duels_won'] }}</th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-sm-12 col-md-6 col-lg-3 mb-4">
+				<h1 style="font-size:35px" class="display-6">Errors</h1>
+				<hr class="my-4">
+				<table class="table table-borderless table-transparent">
+					<tbody>
+						<tr>
+							<td>Errors leading to shot</td>
+							<th>{{ stats[0]['errors_leading_to_shot'] }}</th>
+						</tr>
+						<tr>
+							<td>Fouls</td>
+							<th>{{ stats[0]['fouls'] }}</th>
+						</tr>
+						<tr>
+							<td>Was fouled</td>
+							<th>{{ stats[0]['was_fouled'] }}</th>
+						</tr>
+						<tr>
+							<td>Offsides</td>
+							<th>{{ stats[0]['offsides'] }}</th>
+						</tr>
+						<tr>
+							<td>Yellow</td>
+							<th>{{ stats[0]['yellow'] }}</th>
+						</tr>
+						<tr>
+							<td>Yellow-red</td>
+							<th>{{ stats[0]['yellow_red'] }}</th>
+						</tr>
+						<tr>
+							<td>Red</td>
+							<th>{{ stats[0]['red'] }}</th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-sm-9 col-lg-9">
+					<h1 style="font-size:35px" class="display-6">Similar Players</h1>
+					<hr class="my-4">
+					<div class="row">
+						<div class="col-sm-12 col-md-8 col-lg-4 mb-4">
+							<a href="{{ url_for('player_details', id=player['id']) }}">
+								<div class="card2">
+									<div class="front" style="background-image: url('https://lapangbola-rails-files.s3.ap-southeast-1.amazonaws.com/documents/players/PE1818651428_original_17925.png?1691053278')"></div>
+									<div class="back">
+										<div>
+											<div class="name">{{ player['name'] }}</div>
+											<p class="position">{{ player['position'] }}</p>
+											<p class="market">Market Value:<br><b style="color:#157811">{{ player['market_value'] }}</b></br></p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-sm-12 col-md-8 col-lg-4 mb-4">
+							<a href="{{ url_for('player_details', id=player['id']) }}">
+								<div class="card2">
+									<div class="front" style="background-image: url('https://img.a.transfermarkt.technology/portrait/big/952266-1643693538.jpg?lm=1')"></div>
+									<div class="back">
+										<div>
+											<div class="name">{{ player['name'] }}</div>
+											<p class="position">{{ player['position'] }}</p>
+											<p class="market">Market Value:<br><b style="color:#157811">{{ player['market_value'] }}</b></br></p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-sm-12 col-md-8 col-lg-4 mb-4">
+							<a href="{{ url_for('player_details', id=player['id']) }}">
+								<div class="card2">
+									<div class="front" style="background-image: url('https://img.a.transfermarkt.technology/portrait/big/715795-1702636857.png?lm=1')"></div>
+									<div class="back">
+										<div>
+											<div class="name">{{ player['name'] }}</div>
+											<p class="position">{{ player['position'] }}</p>
+											<p class="market">Market Value:<br><b style="color:#157811">{{ player['market_value'] }}</b></br></p>
+										</div>
+									</div>
+								</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 {% endblock %}

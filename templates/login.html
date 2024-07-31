@@ -17,16 +17,24 @@
 	<div class="row justify-content-center">
 		<div class="col-md-6 col-lg-4">
 			<div class="login-wrap p-0">
-				<form action="#" class="signin-form">
+				<form action="{{ url_for('login') }}" method="POST" class="signin-form">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Username" required>
+						<input type="text" name="username" class="form-control" placeholder="Username" required>
 					</div>
 					<div class="form-group">
-						<input id="password-field" type="password" class="form-control" placeholder="Password" required>
+						<input id="password-field" name="password" type="password" class="form-control" placeholder="Password" required>
 					</div>
 					<div class="form-group">
 						<button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>
 					</div>
+				</form>
+				{% with messages = get_flashed_messages() %}
+					{% if messages %}
+						{% for message in messages %}
+							<p class="flash text-center">{{ message }}</p>
+						{% endfor %}
+					{% endif %}
+				{% endwith %}
 			</div>
 		</div>
 	</div>

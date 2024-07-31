@@ -1,34 +1,227 @@
 {% extends 'base.html' %}
-{% block title %}Login{% endblock %}
+{% block title %}
+	{% if route == 'players' %}
+		{% if data %}
+			Edit Player
+		{% else %}
+			Add Player
+		{% endif %}
+	{% elif route == 'teams' %}
+		{% if data %}
+			Edit Team
+		{% else %}
+			Add Team
+		{% endif %}
+	{% elif route == 'users' %}
+		{% if data %}
+			Change Password
+		{% else %}
+			Add User
+		{% endif %}
+	{% endif %}
+{% endblock %}
 {% block content %}
-<div class="container">
-	<div class="row justify-content-center">
-		<div class="col-md-6 text-center mb-5">
+<div class="jumbotron text-center">
+	<div class="container">
+		<div class="row justify-content-center mb-3">
 		</div>
-	</div>
-	<div class="row justify-content-center">
-		<div class="col-md-6 text-center mb-5">
+		<div class="d-flex justify-content-end mb-4">
+			<a href="{{ url_for('main') }}"><button type="button" class="btn btn-light btn-space"><i class="fa fa-home"></i></button></a>
+			<a href="{{ url_for('logout') }}"><button type="button" class="btn btn-light"><i class="fa fa-sign-out"></i></button></a>
 		</div>
-	</div>
-	<div class="row justify-content-center">
-		<div class="col-md-6 text-center mb-5">
-		</div>
-	</div>
-	<div class="row justify-content-center">
-		<div class="col-md-6 col-lg-4">
-			<div class="login-wrap p-0">
-				<form action="#" class="signin-form">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Username" required>
+		<h1 class="display-6 space-above">
+			{% if route == 'players' %}
+				{% if data %}
+					Edit Player
+				{% else %}
+					Add Player
+				{% endif %}
+			{% elif route == 'teams' %}
+				{% if data %}
+					Edit Team
+				{% else %}
+					Add Team
+				{% endif %}
+			{% elif route == 'users' %}
+				{% if data %}
+					Change Password
+				{% else %}
+					Add User
+				{% endif %}
+			{% endif %}
+		</h1>
+		{% if route == 'users' %}
+			<center><hr class="my-4 col-lg-4"></center>
+			<div class="row justify-content-center">
+				<div class="col-md-6 col-lg-4">
+					<div class="login-wrap p-0">
+						{% if data %}
+						<form action="{{ url_for('edit', code=data.id, route=route) }}" method="POST" class="signin-form">
+								<div class="form-group">
+									<input id="password-field" name="current_password" type="password" class="form-control" placeholder="Current Password" required>
+								</div>
+								<div class="form-group">
+									<input id="password-field" name="new_password" type="password" class="form-control" placeholder="New Password" required>
+								</div>
+								<div class="form-group">
+									<input id="password-field" name="retype_password" type="password" class="form-control" placeholder="Retype New Password" required>
+								</div>
+								<div class="form-group">
+									<button type="submit" class="form-control btn btn-primary submit px-3">Submit</button>
+								</div>
+							</form>
+						{% else %}
+							<form action="{{ url_for('add', route=route) }}" method="POST" class="signin-form">
+								<div class="form-group">
+									<input type="text" name="username" class="form-control" placeholder="Username" required>
+								</div>
+								<div class="form-group">
+									<input id="password-field" name="password" type="password" class="form-control" placeholder="Password" required>
+								</div>
+								<div class="form-group">
+									<input id="password-field" name="retype_password" type="password" class="form-control" placeholder="Retype Password" required>
+								</div>
+								<div class="form-group">
+									<button type="submit" class="form-control btn btn-primary submit px-3">Submit</button>
+								</div>
+							</form>
+						{% endif %}
+						{% with messages = get_flashed_messages() %}
+							{% if messages %}
+								{% for message in messages %}
+									<p class="flash">{{ message }}</p>
+								{% endfor %}
+							{% endif %}
+						{% endwith %}
 					</div>
-					<div class="form-group">
-						<input id="password-field" type="password" class="form-control" placeholder="Password" required>
-					</div>
-					<div class="form-group">
-						<button type="submit" class="form-control btn btn-primary submit px-3">Sign Up</button>
-					</div>
+				</div>
 			</div>
-		</div>
+		{% elif route == 'teams' %}
+			<center><hr class="my-4 col-lg-8"></center>
+			{% if data %}
+				<form action="{{ url_for('edit', code=data.alias, route=route) }}" method="POST" class="row justify-content-center">
+					<div class="col-lg-4 form-group">
+						<input type="text" name="team_name" class="form-control" placeholder="Team Name" value="{{ data.name }}" required>
+					</div>
+					<div class="col-lg-4 form-group">
+						<input type="text" name="alias" class="form-control" placeholder="Alias" value="{{ data.alias }}" required>
+					</div>
+					<div class="col-lg-8 form-group">
+						<input type="text" name="img_url" class="form-control" placeholder="Image URL" value="{{ data.img_url }}" required>
+					</div>
+					<div class="col-lg-8 form-group">
+						<button type="submit" class="form-control btn btn-primary submit px-3">Submit</button>
+					</div>
+				</form>
+			{% else %}
+				<form action="{{ url_for('add', route=route) }}" method="POST" class="row justify-content-center">
+					<div class="col-lg-4 form-group">
+						<input type="text" name="team_name" class="form-control" placeholder="Team Name" required>
+					</div>
+					<div class="col-lg-4 form-group">
+						<input type="text" name="alias" class="form-control" placeholder="Alias" required>
+					</div>
+					<div class="col-lg-8 form-group">
+						<input type="text" name="img_url" class="form-control" placeholder="Image URL" required>
+					</div>
+					<div class="col-lg-8 form-group">
+						<button type="submit" class="form-control btn btn-primary submit px-3">Submit</button>
+					</div>
+				</form>
+			{% endif %}
+		{% elif route == 'players' %}
+			<center><hr class="my-4 col-lg-12"></center>
+			{% if data %}
+				<form action="{{ url_for('edit', code=data.id, route=route) }}" method="POST" class="row justify-content-center">
+					<div class="col-lg-4 form-group">
+						<input type="text" name="name" class="form-control" placeholder="Name" value="{{ data.name }}" required>
+					</div>
+					<div class="col-lg-2 form-group">
+						<input type="text" name="age" class="form-control" placeholder="Age" value="{{ data.age }}" required>
+					</div>
+					<div class="col-lg-2 form-group">
+						<input type="text" name="height" class="form-control" placeholder="Height" value="{{ data.height }}" required>
+					</div>
+					<div class="col-lg-2 form-group">
+						<input type="text" name="market_value" class="form-control" placeholder="Market Value" value="{{ data.market_value }}" required>
+					</div>
+					<div class="col-lg-2 form-group">
+						<input type="text" name="position" class="form-control" placeholder="Position" value="{{ data.position }}" required>
+					</div>
+					<div class="col-lg-6 form-group">
+						<input type="text" name="img_url" class="form-control" placeholder="Image URL" value="{{ data.img_url }}" required>
+					</div>
+					<div class="col-lg-6 form-group">
+						<input type="text" name="team_alias" class="form-control" placeholder="Select Team" value="{{ data.team_alias }}" required>
+					</div>
+					<div class="col-lg-12 form-group">
+						<button type="submit" class="form-control btn btn-primary submit px-3">Submit</button>
+					</div>
+				</form>
+			{% else %}
+				<form action="{{ url_for('add', route=route) }}" method="POST" class="row justify-content-center">
+					<div class="col-lg-4 form-group">
+						<input type="text" name="name" class="form-control" placeholder="Name" required>
+					</div>
+					<div class="col-lg-2 form-group">
+						<input type="text" name="age" class="form-control" placeholder="Age" required>
+					</div>
+					<div class="col-lg-2 form-group">
+						<input type="text" name="height" class="form-control" placeholder="Height" required>
+					</div>
+					<div class="col-lg-2 form-group">
+						<input type="text" name="market_value" class="form-control" placeholder="Market Value" required>
+					</div>
+					<div class="col-lg-2 form-group">
+						<input type="text" name="position" class="form-control" placeholder="Position" required>
+					</div>
+					<div class="col-lg-6 form-group">
+						<input type="text" name="img_url" class="form-control" placeholder="Image URL" required>
+					</div>
+					<div class="col-lg-6 form-group">
+						<input type="text" name="team_alias" class="form-control" placeholder="Select Team" required>
+					</div>
+				<!--
+				<div class="col-lg-2 form-group">
+					<input type="text" class="form-control" placeholder="Total Played" required>
+				</div>
+				<div class="col-lg-2 form-group">
+					<input type="text" class="form-control" placeholder="Started" required>
+				</div>
+				<div class="col-lg-2 form-group">
+					<input type="text" class="form-control" placeholder="Minutes/Game" required>
+				</div>
+				<div class="col-lg-2 form-group">
+					<input type="text" class="form-control" placeholder="Goals Conceded" required>
+				</div>
+				<div class="col-lg-2 form-group">
+					<input type="text" class="form-control" placeholder="Saves Per Game" required>
+				</div>
+				<div class="col-lg-2 form-group">
+					<input type="text" class="form-control" placeholder="Saves Per Game" required>
+				</div>
+				<div class="col-lg-2 form-group">
+					<input type="text" class="form-control" placeholder="Saves Per Game" required>
+				</div>
+				<div class="col-lg-2 form-group">
+					<input type="text" class="form-control" placeholder="Goals" required>
+				</div>
+				<div class="col-lg-2 form-group">
+					<input type="text" class="form-control" placeholder="Scoring Frequency" required>
+				</div>
+				<div class="col-lg-2 form-group">
+					<input type="text" class="form-control" placeholder="Goals Per Game" required>
+				</div>
+				<div class="col-lg-2 form-group">
+					<input type="text" class="form-control" placeholder="Shots Per Game" required>
+				</div>
+				-->
+					<div class="col-lg-12 form-group">
+						<button type="submit" class="form-control btn btn-primary submit px-3">Submit</button>
+					</div>
+				</form>
+			{% endif %}
+		{% endif %}
 	</div>
 </div>
 {% endblock %}

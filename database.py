@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
-from sqlalchemy import String, Integer
+from sqlalchemy import String, Integer, Float
 import pandas as pd
 
 class Base(DeclarativeBase):
@@ -33,6 +33,44 @@ class Player(db.Model):
     position: Mapped[str] = mapped_column(String(5), nullable=False)
     team_alias: Mapped[str] = mapped_column(String(20), db.ForeignKey('teams.alias'))
     team = relationship('Team', back_populates='players')
+    stats = relationship('Statistic', back_populates='player')
+
+class Statistic(db.Model):
+    __tablename__ = 'stats'
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    total_played: Mapped[int] = mapped_column(Integer)
+    started: Mapped[int] = mapped_column(Integer)
+    minutes_per_game: Mapped[int] = mapped_column(Integer)
+    goals_conceded_per_game: Mapped[float] = mapped_column(Float)
+    saves_per_game: Mapped[str] = mapped_column(String(20))
+    goals: Mapped[int] = mapped_column(Integer)
+    scoring_frequency: Mapped[str] = mapped_column(String(20))
+    goals_per_game: Mapped[float] = mapped_column(Float)
+    shots_per_game: Mapped[float] = mapped_column(Float)
+    shots_on_target_per_game: Mapped[float] = mapped_column(Float)
+    assists: Mapped[int] = mapped_column(Integer)
+    key_passes_per_game: Mapped[float] = mapped_column(Float)
+    accurate_per_game: Mapped[str] = mapped_column(String(20))
+    acc_long_balls: Mapped[str] = mapped_column(String(20))
+    acc_crosses: Mapped[str] = mapped_column(String(20))
+    clean_sheets: Mapped[int] = mapped_column(Integer)
+    interceptions_per_game: Mapped[float] = mapped_column(Float)
+    balls_recovered_per_game: Mapped[float] = mapped_column(Float)
+    dribbled_past_per_game: Mapped[float] = mapped_column(Float)
+    clearances_per_game: Mapped[float] = mapped_column(Float)
+    errors_leading_to_shot: Mapped[int] = mapped_column(Integer)
+    succ_dribbles: Mapped[str] = mapped_column(String(20))
+    total_duels_won: Mapped[str] = mapped_column(String(20))
+    aerial_duels_won: Mapped[str] = mapped_column(String(20))
+    fouls: Mapped[float] = mapped_column(Float)
+    was_fouled: Mapped[float] = mapped_column(Float)
+    offsides: Mapped[float] = mapped_column(Float)
+    goal_kicks_per_game: Mapped[float] = mapped_column(Float)
+    yellow: Mapped[int] = mapped_column(Integer)
+    yellow_red: Mapped[int] = mapped_column(Integer)
+    red: Mapped[int] = mapped_column(Integer)
+    player_id: Mapped[int] = mapped_column(Integer, db.ForeignKey('players.id'))
+    player = relationship('Player', back_populates='stats')
 
 account = open('account.txt', 'r')
 users = []
@@ -44,7 +82,7 @@ teams = [{'alias': 'arema', 'name': 'Arema FC', 'img_url': 'https://encrypted-tb
          {'alias': 'bali', 'name': 'Bali United', 'img_url': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYxJ2JNKB7W_8ChneVsAERXExVTACSnkqngg&s'},
          {'alias': 'bhayangkara', 'name': 'Bhayangkara Presisi Indonesia FC', 'img_url': 'https://upload.wikimedia.org/wikipedia/id/f/f3/Logo_Bhayangkara_FC.png'},
          {'alias': 'borneo', 'name': 'Borneo FC Samarinda', 'img_url': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6xf36Y0O_qt8BXo3zv16ZOQgXJtjwmtH70g&s'},
-         {'alias': 'dewa', 'name': 'Dewa United FC', 'img_url': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMKLIjaeJGlyksDQaG5EKUexI4nY9fU1dS-Q&s'},
+         {'alias': 'dewa', 'name': 'Dewa United FC', 'img_url': 'https://upload.wikimedia.org/wikipedia/id/5/53/Dewa_United_FC.png'},
          {'alias': 'madura', 'name': 'Madura United FC', 'img_url': 'https://upload.wikimedia.org/wikipedia/id/8/8a/Madura_United_FC.png'},
          {'alias': 'persebaya', 'name': 'Persebaya Surabaya', 'img_url': 'https://upload.wikimedia.org/wikipedia/id/thumb/a/a1/Persebaya_logo.svg/1200px-Persebaya_logo.svg.png'},
          {'alias': 'persib', 'name': 'Persib Bandung', 'img_url': 'https://upload.wikimedia.org/wikipedia/id/thumb/1/12/Logo_Persib.png/1200px-Logo_Persib.png'},

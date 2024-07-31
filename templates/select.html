@@ -9,6 +9,12 @@
 {% block content %}
 <div class="jumbotron text-center">
 	<div class="container">
+		<div class="row justify-content-center mb-3">
+		</div>
+		<div class="d-flex justify-content-end mb-4">
+			<a href="{{ url_for('main') }}"><button type="button" class="btn btn-light btn-space"><i class="fa fa-home"></i></button></a>
+			<a href="{{ url_for('logout') }}"><button type="button" class="btn btn-light"><i class="fa fa-sign-out"></i></button></a>
+		</div>
 		<h1 class="display-6 space-above">
 			{% if players %}
 				Select Player
@@ -40,7 +46,11 @@
 						<div class="card text-dark card-has-bg click-col">
 							<div class="card-img-overlay d-flex flex-column">
 								<div class="card-body">
-									<img src={{ club['img_url'] }}>
+									{% if club['alias'] == 'dewa' %}
+										<img src={{ club['img_url'] }} height="183px">
+									{% else %}
+										<img src={{ club['img_url'] }} height="250px">
+									{% endif %}
 								</div>
 							</div>
 						</div>
