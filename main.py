@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, url_for, request, flash, abo
 from flask_bootstrap import Bootstrap5
 from flask_login import LoginManager, login_user, current_user, logout_user
 from database import db, User, users, Team, teams, Player, players, Statistic, code
+from ml import recommended_k_players_df
 from sqlalchemy import or_
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
@@ -143,7 +144,10 @@ def player_details(id):
         return redirect(url_for('login'))
     player = db.get_or_404(Player, id)
     stats = player.stats
-    return render_template('player.html', player=player, stats=stats, logged_in=current_user.is_authenticated)
+    recommendations = recommended_k_players_df(player.name, 4)[0][2:]
+    recommendation = [x + 1 for x in recommendations]
+    recommendations = Player.query.filter(Player.id.in_(recommendation)).all()
+    return render_template('player.html', player=player, stats=stats, recommendations=recommendations, logged_in=current_user.is_authenticated)
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():

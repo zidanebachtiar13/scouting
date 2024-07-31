@@ -267,46 +267,22 @@
 					<h1 style="font-size:35px" class="display-6">Similar Players</h1>
 					<hr class="my-4">
 					<div class="row">
-						<div class="col-sm-12 col-md-8 col-lg-4 mb-4">
-							<a href="{{ url_for('player_details', id=player['id']) }}">
-								<div class="card2">
-									<div class="front" style="background-image: url('https://lapangbola-rails-files.s3.ap-southeast-1.amazonaws.com/documents/players/PE1818651428_original_17925.png?1691053278')"></div>
-									<div class="back">
-										<div>
-											<div class="name">{{ player['name'] }}</div>
-											<p class="position">{{ player['position'] }}</p>
-											<p class="market">Market Value:<br><b style="color:#157811">{{ player['market_value'] }}</b></br></p>
+						{% for recommendation in recommendations %}
+							<div class="col-sm-12 col-md-8 col-lg-4 mb-4">
+								<a href="{{ url_for('player_details', id=recommendation['id']) }}">
+									<div class="card2">
+										<div class="front" style="background-image: url({{ recommendation['img_url'] }})"></div>
+										<div class="back">
+											<div>
+												<div class="name">{{ recommendation['name'] }}</div>
+												<p class="position">{{ recommendation['position'] }}</p>
+												<p class="market">Market Value:<br><b style="color:#157811">{{ recommendation['market_value'] }}</b></br></p>
+											</div>
 										</div>
 									</div>
-								</div>
-							</a>
-						</div>
-						<div class="col-sm-12 col-md-8 col-lg-4 mb-4">
-							<a href="{{ url_for('player_details', id=player['id']) }}">
-								<div class="card2">
-									<div class="front" style="background-image: url('https://img.a.transfermarkt.technology/portrait/big/952266-1643693538.jpg?lm=1')"></div>
-									<div class="back">
-										<div>
-											<div class="name">{{ player['name'] }}</div>
-											<p class="position">{{ player['position'] }}</p>
-											<p class="market">Market Value:<br><b style="color:#157811">{{ player['market_value'] }}</b></br></p>
-										</div>
-									</div>
-								</div>
-							</a>
-						</div>
-						<div class="col-sm-12 col-md-8 col-lg-4 mb-4">
-							<a href="{{ url_for('player_details', id=player['id']) }}">
-								<div class="card2">
-									<div class="front" style="background-image: url('https://img.a.transfermarkt.technology/portrait/big/715795-1702636857.png?lm=1')"></div>
-									<div class="back">
-										<div>
-											<div class="name">{{ player['name'] }}</div>
-											<p class="position">{{ player['position'] }}</p>
-											<p class="market">Market Value:<br><b style="color:#157811">{{ player['market_value'] }}</b></br></p>
-										</div>
-									</div>
-								</div>
+								</a>
+							</div>
+						{% endfor %}
 					</div>
 				</div>
 			</div>
