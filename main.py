@@ -135,7 +135,6 @@ def select_player(alias):
         return redirect(url_for('login'))
     result = db.get_or_404(Team, alias)
     players = result.players
-    print(result)
     return render_template('select.html', players=players, logged_in=current_user.is_authenticated)
 
 @app.route('/player/<int:id>')

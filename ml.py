@@ -53,7 +53,7 @@ def recommended_k_players_df(player, k_players = 100):
     elif pos_group == 'Midfielder':
         indices = list(df[(df['Position Group'] == 'Forward')|(df['Position Group'] == 'Midfielder')].index.values)
     elif pos_group == 'Defender':
-        indicies = list(df[(df['Position Group'] == 'Defender')].index.values)
+        indices = list(df[(df['Position Group'] == 'Defender')|(df['Position Group'] == 'Forward')].index.values)
     elif pos_group == 'Goalkeeper':
         indices = list(df[(df['Position Group'] == 'Goalkeeper')].index.values)
 
